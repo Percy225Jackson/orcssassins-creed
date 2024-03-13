@@ -1,5 +1,5 @@
-const canvas = document.getElementById("Canvas");
-
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 function moveRight() {
   player.x = player.x + player.speed;
 }
@@ -21,7 +21,7 @@ const player = {
   speed: 10,
   color: "maroon",
   draw: function () {
-    ctx.fillstyle = this.color;
+    ctx.fillStyle = this.color;
     ctx.fillRect(this.x, this.y, this.height, this.width);
   },
 };
@@ -44,7 +44,7 @@ const laser = {
   },
 };
 
-const ctx = canvas.getContext("2d");
+
 player.draw();
 
 const updateTheCanvas = () => {
