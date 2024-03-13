@@ -12,7 +12,6 @@ function moveUp() {
 function moveDown() {
   player.y = player.y + player.speed;
 }
-
 const player = {
   x: 25,
   y: 25,
@@ -37,7 +36,12 @@ const laser = {
   draw: function () {
     ctx.fillStyle = laser.color;
     ctx.fillRect(laser.x, laser.y, laser.width, laser.height);
-    laser.y -= laser.speed;
+    if (direction = "up"){
+      laser.y -= laser.speed;
+    }
+    if (laser.x < 0) {
+      laser.active = false;
+    }
     if (laser.y < 0) {
       laser.active = false;
     }
@@ -46,11 +50,11 @@ const laser = {
 //dev branch
 
 
-player.draw();
 
 const updateTheCanvas = () => {
   ctx.clearRect(0, 0, 1200, 1200);
   player.draw();
+  laser.draw();
   requestAnimationFrame(updateTheCanvas);
 };
 
@@ -90,7 +94,5 @@ window.addEventListener("keydown", (event) => {
     moveUp();
     direction = "up";
   }
-  if (event.code == "KeyF") {
-    laser.draw();
   }
 });
