@@ -26,35 +26,42 @@ const player = {
 };
 
 const laser = {
+  active: false,
   x: player.x,
   y: player.y,
-  width: 2,
+  width: 10,
   height: 10,
   color: "yellow",
   speed: 20,
-  active: false,
   draw: function () {
     ctx.fillStyle = laser.color;
-    ctx.fillRect(laser.x, laser.y, laser.width, laser.height);
-    if (direction = "up"){
-      laser.y -= laser.speed;
-    }
+    ctx.fillRect(this.x, this.y, this.width, this.height);
     if (laser.x < 0) {
       laser.active = false;
     }
     if (laser.y < 0) {
       laser.active = false;
     }
+    if (laser.y > 1200) {
+      laser.active = false;
+    }
+    if (laser.x > 1200) {
+      laser.active = false;
+    }
   },
 };
 //dev branch
 
-
-
 const updateTheCanvas = () => {
   ctx.clearRect(0, 0, 1200, 1200);
+
+  if (laser.active) {
+    laser.x += 4;
+  }
+  if (laser.active) {
+    laser.draw();
+  }
   player.draw();
-  laser.draw();
   requestAnimationFrame(updateTheCanvas);
 };
 
@@ -94,5 +101,10 @@ window.addEventListener("keydown", (event) => {
     moveUp();
     direction = "up";
   }
+
+  if (event.code == "KeyK") {
+    laser.active = true;
+    console.log(laser.active);
+    console.log(laser.x);
   }
 });
